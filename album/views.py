@@ -3,6 +3,7 @@ import json
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import transaction
+from django.db.models import Q
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -39,7 +40,7 @@ def local_search(request):
   response = {}
   if request.method == 'POST':
     local_search = request.POST.get('local-search')
-    albums = Album.objects.filter(artist__icontains=local_search)
+    albums = Album.objects.filter(Q(artist__icontains=local_search) | Q(title__icontains=local_search)) 
     if len(albums)>0:
       response={
       'albums': albums
