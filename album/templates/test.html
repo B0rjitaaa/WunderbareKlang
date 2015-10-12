@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block main %}
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% for album in albums%}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <!-- <h4 class="text-center"><span class="label label-info">Samsung</span></h4>  delete -->
+                        <a href="{% url 'show-album' album.id %}"><img src="{{album.picture}}" alt="" height="267" width="260" class="img-responsive"></a>
+                        <div class="caption">
+                            <div class="row" style="margin-left:10%">
+                                <div>
+                                    <i class="fa fa-music"> {{album.artist|truncatechars:25}}</i>
+                                </div>
+                                <div>
+                                    <i class="fa fa-user"> {{album.title|truncatechars:25}}</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main %}

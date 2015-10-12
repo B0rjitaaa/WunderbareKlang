@@ -1,0 +1,64 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+__pycache__
+*.py[cod]
+
+# C extensions
+*.so
+
+# Django stuff
+*.log
+*.pot
+
+# Distribution / packaging
+.Python
+env/
+bin/
+build/
+develop-eggs/
+dist/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyCharm stuff
+.idea/
+
+# Sublime Text 3 stuff
+*.sublime-project
+*.sublime-workspace
+wsgi/static
+
+# Vagrant stuff
+.vagrant/
+
+# Node stuff
+node_modules/
+
+# Bower stuff
+bower_components/
+
+# Misc
+.sass-cache
+connect.lock
+coverage/*
+libpeerconnection.log
+npm-debug.log
+testem.log
+.DS_Store
+.travis.yml
+tmp/
+media
+0020_data.py
+
+# Fixture generated data
+shop/fixtures/sample-images/

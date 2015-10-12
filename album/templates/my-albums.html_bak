@@ -1,0 +1,37 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>List albums</title>
+</head>
+<body>
+{% load sectodur %}
+  {% comment %}
+  {% for album in albums %}
+    {{album}}
+  {% endfor %}
+  <br>
+  {% for track in test %}
+    {{track.name}} , {{track.duration|sectodur}}
+    <br>
+  {% endfor %}
+  <img src="{{image}}" alt="">
+  {% endcomment %}
+  {% for album in albums %}
+    {% autoescape on %}
+        <img src="{{ album.picture }}" alt="cover">
+        <br>
+        {{album.artist}} - {{album.title}}
+        <div class="track-list">
+          <ul>
+            {% for song in album.song_albums.all %}
+              <li>{{song.rank}} - {{song.title}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <br>
+    {% endautoescape %}
+  {% endfor %}
+
+
+</body>
+</html>

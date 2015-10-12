@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+
+<h1 class="page-header">Inicio</h1>
+
+  <div class="row" style="margin-bottom:20px">
+      <div class="col-lg-4 col-lg-offset-4">
+          <div class="sidebar-search">
+            <form action="{% url 'local-search' %}" method="POST">
+              {% csrf_token %}
+                  <div class="input-group custom-search-form">
+                      <input type="text" class="form-control" name="local-search" placeholder="Buscar...">
+                      <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">
+                          <i class="fa fa-search"></i>
+                      </button>
+                  </span>
+                  </div>
+              </form>
+                  <!-- /input-group -->
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-lg-3 col-md-offset-3">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <div class="row">
+                      <div class="col-xs-3">
+                          <i class="fa fa-music fa-5x"></i>
+                      </div>
+                      <div class="col-xs-9 text-right">
+                          <div class="huge">{{albums}}</div>
+                      </div>
+                  </div>
+              </div>
+                <div class="panel-footer">
+                    <a href="{% url 'my-albums' %}"><span class="pull-left">Ver mi m&uacute;sica</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span></a>
+                    <div class="clearfix"></div>
+                </div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+          <div class="panel panel-red">
+              <div class="panel-heading">
+                  <div class="row">
+                      <div class="col-xs-3">
+                          <i class="fa fa-video-camera fa-5x"></i>
+                      </div>
+                      <div class="col-xs-9 text-right">
+                          <div class="huge">{{movies}}</div>
+                      </div>
+                  </div>
+              </div>
+              <a href="#">
+                  <div class="panel-footer">
+                      <span class="pull-left">Ver mis pel&iacute;culas</span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                  </div>
+              </a>
+          </div>
+      </div>
+      {% if error %}
+
+      <div class="row">
+        <div class="col-lg-4 col-md-offset-4" style="text-align:center">
+          <div class="bs-example">
+            <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> {{error}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+  </div>
+
+{% endblock %}

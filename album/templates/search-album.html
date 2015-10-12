@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+<h1 class="page-header">Buscar</h1>
+<div class="container">
+  <div class="row">
+    {% if not albums %}
+      <div class="col-md-6 col-md-offset-3">
+        <form action="{% url 'search-lastfm' %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="artist-name">Artista</label>
+            <input type="text" class="form-control" name="artist-name" id="artist-name" placeholder="Artista">
+          </div>
+          <div class="form-group">
+            <label for="album-title">T&iacute;tulo</label>
+            <input type="text" class="form-control" name="album-title" id="album-title" placeholder="T&iacute;tulo">
+          </div>
+          <div class="form-group" style="text-align:center">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    {% if error %}
+      <div class="row">
+        <div class="bs-example">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> {{error}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    {% else %}
+<form action="{% url 'add_albums' %}" method="POST">
+{% csrf_token %}
+  <div class="table-responsive">
+  <button type="submit" class="btn btn-primary">Enviar</button>
+    <table id="mytable" class="table table-bordred table-striped">
+      <thead>
+        <th><input type="checkbox" id="checkall" /></th>
+        <th>Portada</th>
+        <th>T&iacute;tulo</th>
+        <th>Año</th>
+        <th>G&eacute;nero</th>
+        <th>N&uacute;m. Canciones</th>
+        <th style="text-align:center">Añadir</th>
+      </thead>
+
+      <tbody>
+        {% for album in albums %}
+        <tr>
+          <td style="padding-top:50px"><input type="checkbox" name="ids" value="{{ album.collectionId }}" class="checkthis" /></td>
+          <td>
+            <a href="{% url 'add-album' album.collectionId %}"><img src="{{album.artworkUrl100}}" alt="" height="100px" width="100px"></a>
+          </td>
+          {% if artist  %}
+            <td style="padding-top:50px">{{album.artistName}} - {{album.collectionName}}</td>
+          {% else %}
+            <td style="padding-top:50px">{{album.collectionName}}</td>
+          {% endif %}
+          <td style="padding-top:50px">{{album.releaseDate|slice:"4"}}</td>
+          <td style="padding-top:50px">{{album.primaryGenreName}}</td>
+          <td style="padding-top:50px">{{album.trackCount}}</td>
+          <td style="padding-top:50px"><p style="text-align:center" data-placement="top" data-toggle="tooltip" title="Añadir"><a href="#"><i class="fa fa-plus"></i></a></p></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</form>    
+    {% endif %}
+      
+</div>
+{% endblock main %}

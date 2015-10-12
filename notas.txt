@@ -1,0 +1,21 @@
+Client ID: ddbe8c32d19745c5aead12f547d63bf2
+Client Secret: 63c069bd49154fc7b11cb9435148d3a5
+
+https://developer.spotify.com/web-api/search-item/
+
+
+curl -X GET "https://api.spotify.com/v1/search?q=tania%20bowra&type=artist"
+
+artista con albunes
+curl -X GET "https://api.spotify.com/v1/artists/2DuJi13MWHjRHrqRUwk8vH/albums?market=ES&album_type=single&limit=2"
+
+Ejemplo con Knife party (Todos los albums)
+https://api.spotify.com/v1/artists/2DuJi13MWHjRHrqRUwk8vH/albums
+
+
+ITUNES:
+buscar album: https://itunes.apple.com/search?term=until+one
+buscar autor con discos: https://itunes.apple.com/search?term=swedish+house+mafia
+artista y album: https://itunes.apple.com/search?term=knife+party+abandon+ship&entity=song
+artista y cancion: https://itunes.apple.com/search?term=knife+party+404
+tracks de un album: https://itunes.apple.com/lookup?id=530207558&entity=song

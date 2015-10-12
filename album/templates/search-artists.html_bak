@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+<div class="container">
+  <div class="row">
+    {% if not artists %}
+      <div class="col-md-6">
+        <form action="{% url 'search-lastfm' %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="artist-name">Artista</label>
+            <input type="text" class="form-control" name="artist-name" id="artist-name" placeholder="Artista">
+          </div>
+          <div class="form-group">
+            <label for="album-title">T&iacute;tulo</label>
+            <input type="text" class="form-control" name="album-title" id="album-title" placeholder="T&iacute;tulo">
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+    {% else %}
+      <div class="col-md-12">
+        {% for artist in artists %}
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail" style="border:none; text-align:center">
+                <!-- TODO: el href que avya a seleccionar el artista para que se vean los albunes -->
+                {% if artist.images.0.url %}
+                   <a href="{% url 'add-artist' artist.id %}"><img src='{{artist.images.0.url}}' class="avatar img-circle img-thumbnail" alt="avatar" style="width:210px;height:210px"></a>
+                {% else %}
+                  <a href="{% url 'add-artist' artist.id %}"><img src='http://www.motothenw.com/wp-content/uploads/2015/05/placeholder-headshot.jpg' class="avatar img-circle img-thumbnail" alt="avatar" style="width:210px;height:210px"></a>
+                {% endif %}                
+                <div class="caption">
+                  <div class="row" style="margin:4% ">
+                      <div>
+                          <i class="fa fa-user"> {{artist.name|truncatechars:25}}</i>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock main %}

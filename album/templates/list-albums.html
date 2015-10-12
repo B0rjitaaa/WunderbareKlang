@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load sectodur %}
+{% block main %}
+<h1 class="page-header">Mis discos</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% for album in albums %}
+          <div class="col-sm-4 col-md-3">
+            <div class="thumbnail" style="border:none; margin:10px">
+              <a href="{% url 'show-album' album.id %}"><img src="{{album.picture}}" alt="" height="267" width="260" class="img-responsive"></a>
+              <div class="caption">
+                <div class="row" style="text-align:center">
+                    <div>
+                        <p title="{{album.artist}}"><i class="fa fa-user"> {{album.artist|truncatechars:25}}</i></p>
+                        <p title="{{album.title}}"><i class="fa fa-music"> {{album.title|truncatechars:25}}</i></p>
+                     </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock main %}
