@@ -45,7 +45,6 @@ coverage/*
 libpeerconnection.log
 testem.log
 .DS_Store
-.travis.yml
 tmp/
 media
 
