@@ -8,6 +8,18 @@ else
 fi
 
 
+# Update system and install necessary packages
+prepare_system() {
+    apt-get update
+    apt-get dist-upgrade -y
+    apt-get install -y python3 python3-pip vim dos2unix postgresql-9.3 postgresql-server-dev-9.3 postgresql-contrib-9.3 gettext
+}
+
+# Install necessary python packages
+install_python_packages() {
+    pip3 install -r requirements.txt
+}
+
 # Create PostgreSQL config
 set_postgresql() {
     sudo su -l postgres -c "createuser developer -w -s"
@@ -15,6 +27,11 @@ set_postgresql() {
     sudo su -l postgres -c "createdb wundebareklang"
     sudo su -l postgres -c "psql -c \"ALTER USER developer WITH PASSWORD 'developer';\""
     sudo su -l postgres -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE wundebareklang TO developer;\""
+}
+
+prepare_db() {
+    set_postgresql
+    python3 manage.py migrate
 }
 
 
